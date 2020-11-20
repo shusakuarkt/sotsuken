@@ -58,7 +58,7 @@ public:
   void SetC(double c);
   void SetCs(double cs);
   void SetRI(double ri);
-  void Setn(int N);
+  void Setn(double N);
   double GetV0();
   double GetR();
   double Getr0();
@@ -66,7 +66,7 @@ public:
   double GetC();
   double GetCs();
   double GetRI();
-  int Getn();
+  double Getn();
   void SetCm(double cm);
   void SetCM(double cM);  
   void Setalx(double Alx);
@@ -134,7 +134,7 @@ void base:: SetCs(double cs){
 void base:: SetRI(double ri){
   RI=ri;
 };
-void base:: Setn(int N){
+void base:: Setn(double N){
    n=N;
 };
 double base:: GetV0(){
@@ -158,7 +158,7 @@ double base:: GetCs(){
 double base:: GetRI(){
   return RI;
 };
-int base:: Getn(){
+double base:: Getn(){
   return n;
 };
 double base::Geta(){
@@ -315,66 +315,63 @@ void Vt3kV(){
     t=0;
     y=0;
     TCanvas* c1 = new TCanvas();
+    for(int i=0;i<1000;i++){
+      if(l==0){
+	base1->SetR((2e+7)+(i)*1e+6);
+	v0v=base1->GetR();
+	v0="R(Mohm)Hikaku";
+	xaxis="Mohm";
+      }
+      else if(l==1){
+      	base1->Setr0(20+(i)*1);
+      	v0v=base1->Getr0();
+      	v0="r0(ohm)Hikaku";
+      	xaxis="ohm";
+      }
+      else if(l==2){
+      	base1->SetRs((1e+6)+(i)*1e+5);
+      	v0v=base1->GetRs();
+      	//      if(i%2==0){
+      	v0="Rs(Mohm)Hikaku";
+      	// }
+      	// else{
+      	//	v0="Rs="+to_string((int)(v0v/1e+6))+".5Mohm";
+      	//  }
+      	v0v=(v0v/1e+6);
+      	xaxis="Mohm";
+      }
+      else if(l==3){
+      	base1->SetC(4e-9+(i)*1e-10);
+      	v0v=base1->GetC();
+      	if(1){
+      	  v0="C(nF)Hikaku";
+      	}
+      	else{
+      	  v0="C="+to_string((int)(v0v*1e+9))+".5nF";
+      	}
+      	v0v=(v0v*1e+9);
+      	xaxis="nF";
+      }
+      else if(l==4){
+      	base1->SetRI(2e+8+(i)*1e+7);
+      	v0v=base1->GetRI();
+      	v0="RI(Mohm)Hikaku";
+      	v0v=(v0v/1e+6);
+      	xaxis="Mohm";
+      }
+      else if(l==5){
+      	base1->Setn(1+(i)*0.1);
+      	v0v=base1->Getn();
+      	v0="n(layer)Hikaku";
+      	if(i==4){
+      	  m=1;
+      	}
+      	//      v0v=v0v;
+      	xaxis="layer";
+      }
 
-    for(int i=0;i<5;i++){
-    if(l==0){
-      base1->SetR((2e+7)+(i)*2e+7);
-      v0v=base1->GetR();
-      v0="R=MohmHikaku";
-      xaxis="Mohm";
-    }
-    else if(l==1){
-      base1->Setr0(20+i*10);
-      v0v=base1->Getr0();
-      // cout<<v0v<<endl;
-      v0="r0=ohmHikaku";
-      //v0v=(int)(v0v/1e+6);
-      xaxis="ohm";
-    }
-    else if(l==2){
-      base1->SetRs((1e+6)+(i)*1e+6);
-      v0v=base1->GetRs();
-      if(i%2==0){
-	v0="Rs=MohmHikaku";
-      }
-      else{
-	v0="Rs="+to_string((int)(v0v/1e+6))+".5Mohm";
-      }
-      v0v=(int)(v0v/1e+6);
-      xaxis="Mohm";
-    }
-    else if(l==3){
-      base1->SetC(4e-9+(i)*1e-9);
-      v0v=base1->GetC();
-      if(1){
-	v0="C=nFHikaku";
-      }
-      else{
-	v0="C="+to_string((int)(v0v*1e+9))+".5nF";
-      }
-      v0v=(int)(v0v*1e+9);
-      xaxis="nF";
-    }
-    else if(l==4){
-      base1->SetRI(2e+8+(i)*1e+8);
-      v0v=base1->GetRI();
-      v0="RI=MohmHikaku";
-      v0v=(int)(v0v/1e+6);
-      xaxis="Mohm";
-    }
-    else if(l==5){
-      base1->Setn(1+i);
-      v0v=base1->Getn();
-      v0="n=layerHikaku";
-      if(i==4){
-	m=1;
-      }
-      // v0v=(int)v0v;
-      xaxis="layer";
-      //      cout<<v0v<<endl;
-    }
-    for(int z=0;z<1000;z++){
-      t=z*1e-9;
+    for(int z=0;z<10000;z++){
+      t=(double)z*1e-10;
       i1=base1->I1(t);
       i2=base1->I2(t);
       v1=base1->V1(i1);
@@ -383,15 +380,16 @@ void Vt3kV(){
 	//	voltage1->SetPoint(y,v0v,v1);
 	//	current1->SetPoint(y,v0v,i1);
 	voltage2->SetPoint(y,v0v,t*1e+9);
-	cout<<v0v<<endl;
+	//	cout<<v0v<<endl;
 	//	current2->SetPoint(y,v0v,i2);
 	y++;
-       	v0v=0;
+	//       	v0v=0;
 	break;
 
       }
       if(z==999){
-	cout<<name.at(l)<<"="<<v0v<<"は1microsまでに3kVにならない"<<endl;
+	voltage2->RemovePoint(y);
+	//	cout<<name.at(l)<<"="<<v0v<<"は1microsまでに3kVにならない"<<endl;
       }
     }
     }

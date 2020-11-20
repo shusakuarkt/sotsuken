@@ -327,58 +327,58 @@ void t0I1(){
     //    c1->cd(j+1);
     //    R=2e+7 r0=20 Rs=1e+6 C=4e-9 RI=2e+8 n=1
     double v0v;
-    for(int i=0;i<5;i++){
+    for(int i=0;i<1000;i++){
     if(l==0){
-      base1->SetR((2e+7)+(i)*2e+7);
+      base1->SetR((2e+7)+(i)*1e+6);
       v0v=base1->GetR();
-      v0="R=MohmHikaku";
+      v0="R(Mohm)Hikaku";
       xaxis="Mohm";
     }
     else if(l==1){
-      base1->Setr0(20+(i)*5);
+      base1->Setr0(20+(i)*1);
       v0v=base1->Getr0();
-      v0="r0=ohmHikaku";
+      v0="r0(ohm)Hikaku";
       xaxis="ohm";
     }
     else if(l==2){
-      base1->SetRs((1e+6)+(i)*1e+6);
+      base1->SetRs((1e+6)+(i)*1e+5);
       v0v=base1->GetRs();
-      if(i%2==0){
-	v0="Rs=MohmHikaku";
-      }
-      else{
-	v0="Rs="+to_string((int)(v0v/1e+6))+".5Mohm";
-      }
-      v0v=(int)(v0v/1e+6);
+      //      if(i%2==0){
+	v0="Rs(Mohm)Hikaku";
+	// }
+	// else{
+	//	v0="Rs="+to_string((int)(v0v/1e+6))+".5Mohm";
+	//  }
+      v0v=(v0v/1e+6);
       xaxis="Mohm";
     }
     else if(l==3){
-      base1->SetC(4e-9+(i)*1e-9);
+      base1->SetC(4e-9+(i)*1e-10);
       v0v=base1->GetC();
       if(1){
-	v0="C=nFHikaku";
+	v0="C(nF)Hikaku";
       }
       else{
 	v0="C="+to_string((int)(v0v*1e+9))+".5nF";
       }
-      v0v=(int)(v0v*1e+9);
+      v0v=(v0v*1e+9);
       xaxis="nF";
     }
     else if(l==4){
-      base1->SetRI(2e+8+(i)*1e+8);
+      base1->SetRI(2e+8+(i)*1e+7);
       v0v=base1->GetRI();
-      v0="RI=MohmHikaku";
-      v0v=(int)(v0v/1e+6);
+      v0="RI(Mohm)Hikaku";
+      v0v=(v0v/1e+6);
       xaxis="Mohm";
     }
     else if(l==5){
-      base1->Setn(1+(i));
+      base1->Setn(1+(i)*0.1);
       v0v=base1->Getn();
-      v0="n=layerHikaku";
+      v0="n(layer)Hikaku";
       if(i==4){
 	m=1;
       }
-      v0v=(int)v0v;
+      //      v0v=v0v;
       xaxis="layer";
     }
     i1=base1->I1(t);
@@ -394,7 +394,7 @@ void t0I1(){
 
   /////////////////////////////////////////////////////
 
-    string plotname="current"+v0;
+    string plotname="CapacitorCurrent"+v0;
   //プロットのための整形処理
   current1->SetMarkerStyle(20);
   current1->SetMarkerColor(kRed);
@@ -412,11 +412,11 @@ void t0I1(){
 
   //凡例の表示
   TLegend* tl=new TLegend(0.7,0.4,0.9,0.5);
-  tl->AddEntry(current1,"capaciter","p");
+  tl->AddEntry(current1,"capacitor","p");
   // tl->AddEntry(current2,"chamber","p");
   tl->SetTextSize(0.03);//プロットのための整形処理
   tl->Draw();
-  string printname="current"+v0+".png";
+  string printname="CapacitorCurrent"+v0+".png";
 
   gPad->Print(printname.c_str());
   //  if(k==4){
