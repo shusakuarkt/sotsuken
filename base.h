@@ -299,9 +299,9 @@ void base::Reset(){
      aly=200.*1e-3;
      alxt=150.*1e-3;
      alyt=150.*1e-3;
-     acx=1.5*1e-3;
-     acy=16.5*1e-3;
-     acz=0.5*1e-3;
+     acx=15*1e-3;
+     acy=165*1e-3;
+     acz=5*1e-3;
      eacrm=2.7;
      eacrM=4.5;
      eair=1.000586;
