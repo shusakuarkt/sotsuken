@@ -122,7 +122,7 @@ void base::update(){
 };
 double base:: I1(double tt){ return (-((a+c)*exp(a*tt)/(a-b))+((b+c)*exp(b*tt)/(a-b)))*RI*V0/((R+r0)*R0);
 };
-double base:: I2(double tt) {return (((Cs/C)+R*R0*Cs*a)/(R+R0)*((a+c)*exp(a*tt)/(a-b))-(((Cs/C)+(R*R0*Cs*b)/(R+R0))*(b+c)*exp(b*tt)/(a-b)))*RI*V0/((R+r0)*R0);
+double base:: I2(double tt) {return (((Cs/C)+(R*R0*Cs*a)/(R+R0))*((a+c)*exp(a*tt)/(a-b))-(((Cs/C)+(R*R0*Cs*b)/(R+R0))*(b+c)*exp(b*tt)/(a-b)))*RI*V0/((R+r0)*R0);
 };
 double base::GetA(){
   return A;
