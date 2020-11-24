@@ -120,7 +120,7 @@ void base::update(){
   b=(-(1+A)-sqrt(1+A*A+2*B))/(2*Rs*Cs);
   c=1/(Rs*Cs);
 };
-double base:: I1(double tt){ return (-((a+c)*exp(a*tt)/(a-b))-((b+c)*exp(b*tt)/(a-b)))*RI*V0/((R+r0)*R0);
+double base:: I1(double tt){ return (-((a+c)*exp(a*tt)/(a-b))+((b+c)*exp(b*tt)/(a-b)))*RI*V0/((R+r0)*R0);
 };
 double base:: I2(double tt) {return (((Cs/C)+R*R0*Cs*a)/(R+R0)*((a+c)*exp(a*tt)/(a-b))-(((Cs/C)+(R*R0*Cs*b)/(R+R0))*(b+c)*exp(b*tt)/(a-b)))*RI*V0/((R+r0)*R0);
 };
