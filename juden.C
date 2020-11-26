@@ -28,20 +28,7 @@ void juden(){
     base1->Setacx(15.*1e-3);
     base1->Setacy(165.*1e-3);
     base1->Setacz(5.*1e-3);
-    // base1->SetV0(5000);
-    // base1->SetR(3e+7);
-    // base1->Setr0(25);
-    // base1->SetRs(2e+6);
-    // base1->SetC(2e-9);
-    // base1->SetRI(2e+8);
-    // base1->Setn(1);
-    // base1->Setalx(200.*1e-3);
-    // base1->Setaly(200.*13-3);
-    // base1->Setalxt(150.*1e-3);
-    // base1->Setalyt(150.*1e-3);
-    // base1->Setacx(15.*1e-3);
-    // base1->Setacy(165.*1e-3);
-    // base1->Setacz(5.*1e-3);
+    
     base1->update();
 
     TCanvas* c1 = new TCanvas();
