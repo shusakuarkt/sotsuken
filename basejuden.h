@@ -34,8 +34,8 @@ public:
 
   ////////////////////////////////////////////////////
   
-  double   A=Rs*(1/R+1/R0)*(1/n+Cs/C)/R;
-  double   B=Rs*(1/R+1/R0)*(1/n-Cs/C)/R;
+  double   A=Rs*(1/R+1/R0)*(1/n+Cs/C);
+  double   B=Rs*(1/R+1/R0)*(1/n-Cs/C);
 
   double   a=(-(1+A)+sqrt(1+A*A+2*B))/(2*Rs*Cs);
   double   b=(-(1+A)-sqrt(1+A*A+2*B))/(2*Rs*Cs);
@@ -105,7 +105,7 @@ public:
 
   double GetV1highesttime();
   double GetV2highesttime();
-
+  void kyoudaiSet();
   
 };
 void base::update(){
@@ -114,8 +114,8 @@ void base::update(){
   Cm=(eair*evacu*(alx*alx-alxt*alxt-acS)/acz)+(eacrm*evacu*(acS)/acz)+(egasHe*evacu*(alxt*alxt)/acz);
   CM=(eair*evacu*(alx*alx-alxt*alxt-acS)/acz)+(eacrM*evacu*(acS)/acz)+(egasHe*evacu*(alxt*alxt)/acz);
   Cs=(Cm+CM)/2;
-  A=Rs*(1/R+1/R0)*(1/n+Cs/C)/R;
-  B=Rs*(1/R+1/R0)*(1/n-Cs/C)/R;
+  A=Rs*(1/R+1/R0)*(1/n+Cs/C);
+  B=Rs*(1/R+1/R0)*(1/n-Cs/C);
   a=(-(1+A)+sqrt(1+A*A+2*B))/(2*Rs*Cs);
   b=(-(1+A)-sqrt(1+A*A+2*B))/(2*Rs*Cs);
   c=1/(Rs*Cs);
@@ -321,8 +321,47 @@ void base::Reset(){
 };
 double base::GetV1highesttime(){
   return (1/(b-a))*log((a*a+c*a)/(b*b+c*b));
-}
+};
 
 double base::GetV2highesttime(){
   return (1/(b-a))*log(((1/n+Cs/C+R*r0*Cs*a/(R+r0))*(a*a+a*c)/(a-b))/((1/n+Cs/C+R*r0*Cs*b/(R+r0))*(b*b+b*c)/(a-b)));
+};
+
+void base::kyoudaiSet(){
+     V0=8.0e+3;//voltage
+     R=2e+7;
+     r0=20;
+     Rs=1e+6;
+     C=4e-9;
+     RI=2e+8;
+     n=8;//number of layer
+     alx=200.*1e-3;
+     aly=200.*1e-3;
+     alxt=150.*1e-3;
+     alyt=150.*1e-3;
+     acx=15*1e-3;
+     acy=165*1e-3;
+     acz=5*1e-3;
+     eacrm=2.7;
+     eacrM=4.5;
+     eair=1.000586;
+     egasAr=1.00517;
+     egasHe=1.0007;
+     evacu=8.85e-12;
+     R0=r0+RI;
+   acS=acx*acy*4;
+   Cm=19.3*1e-12;
+   CM=26.3*1e-12;
+     Cs=(Cm+CM)/2;
+
+
+  ////////////////////////////////////////////////////
+  
+     A=Rs*(1/R+1/R0)*(1/n+Cs/C);
+     B=Rs*(1/R+1/R0)*(1/n-Cs/C);
+
+     a=(-(1+A)+sqrt(1+A*A+2*B))/(2*Rs*Cs);
+     b=(-(1+A)-sqrt(1+A*A+2*B))/(2*Rs*Cs);
+     c=1/(Rs*Cs);
+
 };
